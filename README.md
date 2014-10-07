@@ -27,7 +27,6 @@ ASP.NET MVC 5 + Razor + HTML + JavaScript + MSSQL and more....<br>
 
 <b>Documentation</b><br>
 [Idea ...](https://onedrive.live.com/view.aspx?cid=0094C30C270D9ABF&resid=94C30C270D9ABF%21148&app=Word&authkey=%21AJ04l3zj1czGrIo&wdo=1)<br>
-[Presentation ...](https://onedrive.live.com/view.aspx?cid=0094C30C270D9ABF&resid=94C30C270D9ABF%21149&app=PowerPoint&authkey=%21AJ04l3zj1czGrIo&wdo=1)
 
 <p>
 <b>Project link</b><br>
