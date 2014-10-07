@@ -30,7 +30,7 @@ ASP.NET MVC 5 + Razor + HTML + JavaScript + MSSQL and more....<br>
 
 <p>
 <b>Project link</b><br>
-http://tutors-1.apphb.com/
+https://bitbucket.org/Nvernik/tutors
 </p>
 
 <p>
@@ -40,8 +40,8 @@ https://github.com/matrostik/teachme.mvc.net
 
 <p>
 <b>License</b><br>
-The TeachMe project is licensed under the open source BSD license.<br>
-Copyright (c) 20014, TeachMe & JCE 
+The Tutors project is licensed under the open source BSD license.<br>
+Copyright (c) 20014, Tutors&JCE
 All rights reserved.
 </p>
 
@@ -51,13 +51,8 @@ This repository directly connected to AppHarbor host service, so to see change j
 </p>
 
 <p>
-<b>Test Instructions</b><br>
-Coming soon.
-</p>
-
-<p>
 <b>Issues Tracker</b><br>
-https://github.com/matrostik/teachme.mvc.net/issues
+https://bitbucket.org/Nvernik/tutors
 </p>
 
 
