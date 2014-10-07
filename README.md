@@ -52,7 +52,7 @@ This repository directly connected to AppHarbor host service, so to see change j
 
 <p>
 <b>Issues Tracker</b><br>
-https://bitbucket.org/Nvernik/tutors
+https://bitbucket.org/Nvernik/tutors/src
 </p>
 
 
