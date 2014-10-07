@@ -8,7 +8,7 @@ Project name: <b>Tutors</b><br>
 Project logo:<br>
 </p>
 
-![Tutors logo](http://www.tutors.ac.cy/images/tlogo.gif)
+![Tutors logo](http://s020.radikal.ru/i703/1410/88/2b270a876d6b.jpg)
 
 <p>
 <b>About</b><br>
