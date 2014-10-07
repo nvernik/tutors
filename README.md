@@ -35,7 +35,7 @@ https://bitbucket.org/Nvernik/tutors
 
 <p>
 <b>Repository link</b><br>
-https://github.com/matrostik/teachme.mvc.net
+https://aliska76@bitbucket.org/Nvernik/tutors.git
 </p>
 
 <p>
