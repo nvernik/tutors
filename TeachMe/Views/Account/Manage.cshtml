@@ -1,0 +1,71 @@
+﻿@using Tutors.Models;
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "ניהול חשבון";
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <h2 class="pull-right"><i class="fa fa-cogs color-green"></i> &nbsp;@ViewBag.Title</h2>
+    </div><!--/container-->
+</div>
+<div class="container content">
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div class="tab-v1">
+        <ul class="nav nav-tabs">
+            <li id="tab1" class="active"><a href="#navigation" data-toggle="tab">ניווט</a></li>
+            <li id="tab2" class=""><a href="#password" data-toggle="tab">ניהול סיסמא</a></li>
+            <li id="tab3" class=""><a href="#social" data-toggle="tab">ניהול התחברויות</a></li>
+            <li id="tab4" class=""><a href="#messages" data-toggle="tab">הודעות</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="navigation">
+                <h4>ניווט</h4>
+                @if (!ViewBag.HasProfile)
+                {
+                    @Html.ActionLinkIcon("צור פרופיל מורה", "Create", "Profile", "glyphicon glyphicon-user", new { @class = "btn-u" })
+                }
+                else
+                {
+                    <p>@Html.ActionLinkIcon("צפה בפרופיל מורה", "Index", "Profile", "glyphicon glyphicon-eye-open", new { @class = "btn-u" })</p>
+                    <p>@Html.ActionLinkIcon("עדכן פרופיל מורה", "Edit", "Profile", "glyphicon glyphicon-edit", new { @class = "btn-u" })</p>
+                }
+            </div>
+            <div class="tab-pane fade" id="password">
+                <h4>ניהול סיסמא</h4>
+                @if (ViewBag.HasLocalPassword)
+                {
+                    @Html.Partial("_ChangePasswordPartial")
+                }
+                else
+                {
+                    @Html.Partial("_SetPasswordPartial")
+                }
+            </div>
+            <div class="tab-pane fade" id="social">
+                <h4>ניהול התחברויות</h4>
+                <section id="externalLogins">
+                    @Html.Action("RemoveAccountList")
+                    @Html.Partial("_ExternalLoginsListPartial", new { Action = "LinkLogin", ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>
+            <div class="tab-pane fade" id="messages">
+                <h4>הודעות</h4>
+                <div><img alt="" class="img-responsive" src="~/Images/under-construction-icon.png"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script language="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+
+            //set active tab
+            var tab = '@ViewBag.ActiveTab';
+            $('#' + tab + ' a').trigger('click');
+
+        });
+
+    </script>
+}

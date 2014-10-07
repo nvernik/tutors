@@ -1,0 +1,31 @@
+﻿@using Microsoft.Owin.Security
+
+<h4>כניסה באמצעות רשת חברתית</h4>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+        <div>
+            <p>אין כרגע אפשרות להתחבר דרך רשתות חברתיות, אנא נסה שוב במועד מאוחר יותר</p>
+        </div>
+    }
+    else
+    {
+        string action = Model.Action;
+        string returnUrl = Model.ReturnUrl;
+        using (Html.BeginForm(action, "Account", new { ReturnUrl = returnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                @foreach (AuthenticationDescription p in loginProviders)
+                {
+                    String image = @p.Caption + ".png";
+                    <button class="btn-link" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="התחבר דרך חשבון ה- @p.Caption שלך"><img src="/Images/@image" width="70" height="70" style="" /></button>
+                }
+                </p>
+            </div>
+        }
+    }
+}

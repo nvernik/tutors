@@ -1,0 +1,213 @@
+﻿@model TeachMe.Models.Teacher
+
+@{
+    ViewBag.Title = "עמוד הפרופיל";
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <h2 class="pull-right"><span class="fa fa-eye color-green"></span> &nbsp;@ViewBag.Title</h2>
+    </div><!--/container-->
+</div>
+<div class="container content">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">פרטים אישיים</div>
+                <div class="panel-body">
+
+                    <div class="col-md-3">
+                        <div class="col-md-11">
+                            <a href="#">
+                                <span>
+                                    <img src="@Model.PictureUrl" class="img-responsive rounded-2x img-bordered" align="left" />
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <dd>
+                        <b>שם פרטי:</b> @Html.DisplayFor(model => model.User.FirstName)
+                    </dd>
+                    <dd>
+                        <b>שם משפחה:</b> @Html.DisplayFor(model => model.User.LastName)
+                    </dd>
+                    <dd>
+                        <b>גיל:</b> @Html.DisplayFor(model => model.Age)
+                    </dd>
+                    <dd>
+                        <b>טלפון:</b> @Html.DisplayFor(model => model.Phone)
+                    </dd>
+                    <dd>
+                        <b>אימייל:</b> @Html.DisplayFor(model => model.User.UserName)
+                    </dd>
+                    <dd>
+                        <b>עיר:</b> @Html.DisplayFor(model => model.City)
+                    </dd>
+                    <dd>
+                        <b>רחוב:</b> @Html.DisplayFor(model => model.Street)
+                    </dd>
+                    <dd>
+                        <b>מספר בית:</b> @Html.DisplayFor(model => model.HomeNum)
+                    </dd>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">תיאור כללי</div>
+                <div class="panel-body">
+
+                    <dd>
+                        <b>השכלה:</b>  @Html.DisplayFor(model => model.Education)
+                    </dd>
+
+                    <dd>
+                        <b>מוסד אקדמי:</b> @Html.Raw(@Model.Institution)
+                    </dd>
+
+                    <dd>
+                        <b>אודות:</b> @Html.DisplayFor(model => model.About)
+                    </dd>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">פרטי השיעור</div>
+                <div class="panel-body">
+
+                    <dd>
+                        <b>מקצוע:</b> @Html.DisplayName(Model.GetSubjects())</span>
+                    </dd>
+
+                    <dd>
+                        <b>משך השיעור:</b> @Html.DisplayFor(model => model.LessonTime) דקות
+                    </dd>
+
+                    <dd>
+                        <b>מחיר השיעור:</b> @Html.DisplayFor(model => model.LessonPrice) ש"ח
+                    </dd>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">מצב פרופיל</div>
+                <div class="panel-body">
+
+                    <dd>
+                        <span style="pointer-events:none;" dir="ltr">
+                            <input type="checkbox" name="Example" id="switch-isActive" data-on-color="success" data-off-color="danger" data-on-text="פעיל" data-off-text="מושהה">
+                        </span>
+                    </dd>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">המלצות</div>
+                <div class="panel-body">
+
+                    <dd>
+                        דירוג: @Html.DisplayFor(model => model.Raters)
+                    </dd>
+                    <dd>
+                        תגובות:
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div style="overflow-y:auto; height: 300px;">
+                                    @foreach (var c in Model.Comments)
+                                    {
+                                        <div class="shadow-wrapper">
+                                            <div class="tag-box tag-box-v3 margin-bottom-15 box-shadow shadow-effect-2" style="padding:10px">
+                                                <div class="media">
+                                                    <a class="pull-right" href="#">
+                                                        <i class="icon-custom icon-lg icon-color-u fa fa-comments"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading"><span class="text-border text-border-green">@c.Date.ToString("dd.MM.yyyy")</span></h4>
+                                                        <p>@c.AuthorName:</p>
+                                                        <p>@c.CommentText</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </dd>
+           
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-danger" data-toggle="modal" id="deleteProfile" href="#confirmDeleteProfile" data-url="/Profile/Delete">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    מחק פרופיל מורה
+                </a>
+                @if (Model.isActive)
+                {
+                    @Html.ActionLinkIcon("השהה פרופיל מורה", "ChangeActive", "Profile", "glyphicon glyphicon-off", new { @class = "btn btn-warning" })
+                }
+                else
+                {
+                    @Html.ActionLinkIcon("הפעל פרופיל מורה", "ChangeActive", "Profile", "glyphicon glyphicon-off", new { @class = "btn btn-warning" })
+                }
+                @Html.ActionLinkIcon("ערוך פרופיל מורה", "Edit", "Profile", "glyphicon glyphicon-edit", new { @class = "btn btn-success" })
+            </div>
+            <hr />
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="confirmDelete">
+    <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="float:left" data-dismiss="modal" aria-hidden="true">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <h4 class="modal-title"><strong>מחיקת פרופיל</strong></h4>
+            </div>
+            <div class="modal-body">
+                <p>האם אתה בטוח שברצונך למחוק את הפרופיל?</p>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("", "", FormMethod.Post, new { id = "confirmDeleteForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-u btn-u-red">
+                        <span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;מחק
+                    </button>
+                    <button type="button" class="btn-u btn-u-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;בטל
+                    </button>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@Styles.Render("~/Content/bootstrapswitch")
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrapswitch")
+
+    <script type="text/javascript">
+
+        $('#switch-isActive').bootstrapSwitch('state', @Model.isActive.ToString().ToLower());
+
+        //modal comment delete confirm
+        $(document).on("click", "#deleteProfile", function () {
+            var url = $(this).data('url');//select action url
+
+            $(".modal-footer #confirmDeleteForm").attr('action', url);
+            $('#confirmDelete').modal('show');
+        });
+
+    </script>
+}

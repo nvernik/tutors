@@ -1,0 +1,265 @@
+﻿@model TeachMe.Models.TeacherViewModel
+@{
+    ViewBag.Title = "עמוד הפרופיל של " + @Model.Teacher.GetFullName();
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <h2 class="pull-right"><i class="fa fa-user color-green"></i> &nbsp;@ViewBag.Title</h2>
+    </div><!--/container-->
+</div>
+<div class="container content">
+
+    <div class="shadow-wrapper">
+        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+            <div class="row">
+                <div class=" col-md-3">
+                    <div class="margin-bottom-30">
+                        <div class="headline"><h2>מפה</h2></div>
+                        <p>
+                            <div id="map-canvas" style="width: 100%; min-height:250px; min-width:250px; height: 100%; border: 1px solid #ddd;"></div>
+                        </p>
+                    </div>
+                    <div class="margin-bottom-30">
+                        <div class="headline"><h2>פרטי התקשרות</h2></div>
+                        <ul class="list-unstyled who margin-bottom-30" style="padding-right:0">
+                            <li><a href="#"><i class="fa fa-envelope"></i> &nbsp;@Html.DisplayFor(model => model.Teacher.User.UserName)</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i> &nbsp;@Html.DisplayFor(model => model.Teacher.Phone)</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="headline"><h2>תיאור כללי</h2></div>
+                            <ul class="list-unstyled margin-bottom-30" style="padding-right:0">
+                                <li><b><span class="text-border text-border-green">השכלה</span>:</b>  @Html.DisplayFor(model => model.Teacher.Education)</li>
+                                <li><b><span class="text-border text-border-green">מוסד אקדמי</span>:</b> @Html.Raw(@Model.Teacher.Institution)</li>
+                                <li><b><span class="text-border text-border-green">אודות</span>:</b> @Html.DisplayFor(model => model.Teacher.About)</li>
+                            </ul>
+                        </div>
+
+                        <div class=" col-md-7">
+                            <div class="headline"><h2>פרטים אישיים</h2></div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <ul class="list-unstyled margin-bottom-30" style="padding-right:0">
+                                        <li><b><span class="text-border text-border-green">שם פרטי</span>:</b> @Html.DisplayFor(model => model.Teacher.User.FirstName)</li>
+                                        <li><b><span class="text-border text-border-green">שם משפחה</span>:</b> @Html.DisplayFor(model => model.Teacher.User.LastName)</li>
+                                        <li><b><span class="text-border text-border-green">גיל</span>:</b> @Html.DisplayFor(model => model.Teacher.Age)</li>
+                                        <li><b><span class="text-border text-border-green">עיר</span>:</b> @Html.DisplayFor(model => model.Teacher.City)</li>
+                                        <li><b><span class="text-border text-border-green">רחוב</span>:</b> @Html.DisplayFor(model => model.Teacher.Street)</li>
+                                        <li><b><span class="text-border text-border-green">מספר בית</span>:</b> @Html.DisplayFor(model => model.Teacher.HomeNum)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-5">
+                                    <img class="img-responsive rounded-2x img-bordered" src="@Model.Teacher.PictureUrl" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-md-9">
+                            <div class="headline"><h2>פרטי השיעור</h2></div>
+                            <ul class="list-unstyled margin-bottom-30" style="padding-right:0">
+                                <li><b><span class="text-border text-border-green">מקצוע</span>:</b> @Html.DisplayName(Model.Teacher.GetSubjects())</li>
+                                <li><b><span class="text-border text-border-green">משך השיעור</span>:</b> @Html.DisplayFor(model => model.Teacher.LessonTime) דקות</li>
+                                <li><b><span class="text-border text-border-green">מחיר השיעור</span>:</b> @Html.DisplayFor(model => model.Teacher.LessonPrice) ש"ח</li>
+                            </ul>
+                        </div>
+                        <div class=" col-md-3">
+                            <div class="headline"><h2>דירוג</h2></div>
+                            @Html.Partial("_TeacherRatingPartial", Model.Teacher)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="headline"><h2>שיתוף</h2></div>
+        <div class="col-md-12">
+            <button class="btn btn-android-inversed" id="sendProfile"><i class="fa fa-envelope"></i></button>
+            <a class="btn btn-facebook-inversed" href="https://www.facebook.com/sharer/sharer.php?u=@Request.Url.AbsoluteUri" target="_blank"><i class="fa fa-facebook" style="width:13px"></i></a>
+            <a class="btn btn-googleplus-inversed" href="https://plus.google.com/share?url=@Request.Url.AbsoluteUri" target="_blank"><i class="fa fa-google-plus"></i></a>
+            <a class="btn btn-twitter-inversed" href="https://twitter.com/share?url=@Request.Url.AbsoluteUri" target="_blank"><i class="fa fa-twitter"></i></a>
+        </div>
+        <!-- Start Send Email Modal -->
+        <div class="modal fade" id="sendProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-dialog-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="float:left">×</button>
+                        <h4 class="modal-title" id="myModalLabel">שלח לחבר</h4>
+                    </div>
+                    @using (Html.BeginForm("SendProfile", "Teacher", FormMethod.Post))
+                    {
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    @Html.Hidden("id", Model.Teacher.Id)
+                                    <label><span class="color-red">*</span>שם השולח/ת</label>
+                                    <div class="row margin-bottom-20">
+                                        <div class="col-md-6 col-md-offset-6">
+                                            <input type="text" id="from" name="from" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <label><span class="color-red">*</span>שלח לדוא"ל</label>
+                                    <div class="row margin-bottom-20">
+                                        <div class="col-md-6 col-md-offset-6">
+                                            <input type="text" name="email" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <label><span class="color-red">*</span>הערות</label>
+                                    <div class="row margin-bottom-20">
+                                        <div class="col-md-7 col-md-offset-5">
+                                            <textarea class="form-control" name="comment" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn-u btn-u-primary"><i class="fa fa-envelope"></i>&nbsp;שלח</button>
+                            <button type="button" class="btn-u btn-u-default" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;סגור</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- End Send Email Modal -->
+
+    </div>
+
+    <div class="row comments">
+        <div class="headline"><h2>תגובות</h2></div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div style="overflow-y:auto; height: 550px;">
+                    @foreach (var c in Model.Teacher.Comments)
+                    {
+                        <div class="shadow-wrapper">
+                            <div class="tag-box tag-box-v3 margin-bottom-15 box-shadow shadow-effect-2" style="padding:10px">
+                                <div class="media">
+                                    <a class="pull-right" href="#">
+                                        <i class="icon-custom icon-lg icon-color-u fa fa-comments"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><span class="text-border text-border-green">@c.Date.ToString("dd.MM.yyyy")</span></h4>
+                                        <p>@c.AuthorName:</p>
+                                        <p>@c.CommentText</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Comment Form -->
+
+    <p>
+        @Html.Partial("_CreateComment", Model.Comment)
+    </p>
+
+</div>
+
+@Styles.Render("~/Content/brand-buttons")
+
+@section Scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGG8Hq0jur-Ca6QtjQ0iQFQ3TJG9WzEA8&v=3.exp&sensor=true&language=he" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        //modal comment delete confirm
+        $(document).on("click", "#sendProfile", function () {
+            $('#sendProfileModal').modal('show');
+        });
+        var mapcode;
+        var map;
+        function initialize() {
+            var image = '/Images/map-marker.png';
+            var latlng = new google.maps.LatLng('@Model.Teacher.GeoLocation.Latitude', '@Model.Teacher.GeoLocation.Longitude');
+            var myOptions = {
+                zoom: 14,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+            var marker = new google.maps.Marker
+            (
+                {
+                    position: new google.maps.LatLng('@Model.Teacher.GeoLocation.Latitude', '@Model.Teacher.GeoLocation.Longitude'),
+                    map: map,
+                    icon: image
+                }
+            );
+        }
+        window.onload = initialize;
+
+        function codeAddress() {
+            var add = document.getElementById('address').value;
+            mapcode.geocode({ 'address': add }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    diag.setCenter(results[0].geometry.location);
+                    var hint = new google.maps.Marker({
+                        diag: map,
+                        position: results[0].geometry.location,
+                        title: add
+                    });
+                    hint.setMap(diag);
+                } else {
+                    alert('This code is not successful ' + status);
+                }
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        // ratting system: https://github.com/irfan/jquery-star-rating
+        $('.ratting-item').rating(function (vote, event) {
+            var anchor = $(event.currentTarget),
+                pid = anchor.closest(".ratting-item").data("pid"),
+                url = '@Url.Action("RateItem", "Teacher")';
+
+            // show message while doing the database round trip
+            $('.ratting-item[data-pid=' + pid + ']')
+                .next()
+                .text("...מעבדים את בחירתך");
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: { rate: vote, id: pid },
+                success: function (data) {
+
+                    if (data.success) {
+                        // all went well, here you can say Thank you
+                        $('.ratting-item[data-pid=' + data.pid + ']')
+                            .next()
+                            .text("סה''כ דירוגים " + data.total + "");
+                    }
+                    else {
+                        // There must be an Exception error, let's show it
+                        $('.ratting-item[data-pid=' + data.pid + ']')
+                            .next()
+                            .text("כבר דירגת");
+                    }
+                },
+                error: function (err) {
+                    // the call thrown an error
+                    //$('.result').text(err);
+                },
+                complete: function () {
+                    //$(".loading").hide();
+                }
+            });
+        });
+
+
+    </script>
+}
