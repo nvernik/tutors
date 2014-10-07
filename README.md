@@ -4,25 +4,25 @@ teachme.mvc.net
 <p><b>Repository for TeachMe Project</b></p>
 <p>
 <b>Project Info</b><br>
-Project name: <b>TeachME</b><br>
+Project name: <b>Tutors</b><br>
 Project logo:<br>
 </p>
 
-![TeacMe logo](http://i.imgur.com/PlNiLUl.jpg)
+![Tutors logo](http://i.imgur.com/PlNiLUl.jpg)
 
 <p>
 <b>About</b><br>
-TeachMe is a platform for everyone who is looking for a private teacher or wants to advertise himself as a teacher.
+Tutors is a platform for everyone who is looking for a private teacher or wants to advertise himself as a teacher.
 </p>
 
 <p>
-<b>TeachMe Technology</b><br>
+<b>Tutors Technology</b><br>
 ASP.NET MVC 5 + Razor + HTML + JavaScript + MSSQL and more....<br>
 </p>
 
 
-<b>TeachMe Team</b><br>
-[Dev Ninjas ...](https://github.com/matrostik/teachme.mvc.net/wiki/Team)
+<b>Tutors Team</b><br>
+
 <br>
 
 <b>Documentation</b><br>
@@ -31,7 +31,7 @@ ASP.NET MVC 5 + Razor + HTML + JavaScript + MSSQL and more....<br>
 
 <p>
 <b>Project link</b><br>
-http://teachme-1.apphb.com/
+http://tutors-1.apphb.com/
 </p>
 
 <p>
@@ -62,5 +62,4 @@ https://github.com/matrostik/teachme.mvc.net/issues
 </p>
 
 
-See more at [TeachMe Wiki](https://github.com/matrostik/teachme.mvc.net/wiki)
-
+See more at [Tutors Wiki](https://github.com/matrostik/teachme.mvc.net/wiki)
