@@ -1,14 +1,14 @@
-teachme.mvc.net
+tutors.mvc.net
 ===============
 
-<p><b>Repository for TeachMe Project</b></p>
+<p><b>Repository for tutors Project</b></p>
 <p>
 <b>Project Info</b><br>
 Project name: <b>Tutors</b><br>
 Project logo:<br>
 </p>
 
-![Tutors logo](http://i.imgur.com/PlNiLUl.jpg)
+![Tutors logo](http://www.tutors.ac.cy/images/tlogo.gif)
 
 <p>
 <b>About</b><br>
