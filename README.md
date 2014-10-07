@@ -62,4 +62,4 @@ https://github.com/matrostik/teachme.mvc.net/issues
 </p>
 
 
-See more at [Tutors Wiki](https://github.com/matrostik/teachme.mvc.net/wiki)
+See more at [Tutors Wiki]https://aliska76@bitbucket.org/Nvernik/tutors.git)
